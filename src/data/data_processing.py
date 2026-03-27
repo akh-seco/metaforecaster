@@ -1,3 +1,5 @@
+# Based on sebastian.rosengren@secotools.com/pipelines/income_read_productnumber
+
 import pandas as pd
 import numpy as np
 import logging
