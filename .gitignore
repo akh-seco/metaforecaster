@@ -1,0 +1,28 @@
+# GitHub Copilot artifacts
+# Ignore common Copilot files, caches and local settings
+.copilot/
+.copilot.*
+*.copilot
+*.copilot.*
+copilot.*
+copilot.log
+*.copilotcache
+
+# Editor integration files (Copilot VS Code / IDE helpers)
+.vscode/.copilot*
+.vscode/copilot.*
+.idea/copilot*
+
+# GitHub configuration for Copilot
+.github/copilot*
+
+# Copilot Labs / experimental caches
+.copilot-lab/
+
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
