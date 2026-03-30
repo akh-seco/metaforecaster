@@ -12,3 +12,5 @@ class DataExtractor:
             return data
         except Exception as e:
             logging.error(f"Error extracting data from {self.file_path}: {e}")
+
+            

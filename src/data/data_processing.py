@@ -5,32 +5,27 @@ import numpy as np
 import logging
 
 class DataProcessor:
-    def __init__(self, data: pd.DataFrame):
+    def __init__(self, data: pd.DataFrame, new_name_cols: dict, missing_value_cols: list):
         self.data = data
+        self.new_name_cols = new_name_cols
+        self.missing_value_cols = missing_value_cols
+
+    def rename_cols(self):
+        for old_col, new_col in self.new_name_cols.items():
+            try:
+                if old_col in self.data.columns():
+                    self.data.rename(columns={old_col: new_col}, inplace=True)
+                    logging.info(f"Column {old_col} successfully renamed to {new_col}")
+            except Exception as e:
+                logging.error(f"Error trying to rename column {old_col}: {e}")
     
-    def rename_columns(self):
-        try:
-            if 'ProductNumber' in self.data.columns():
-                self.data.rename(columns={'ProductNumber': 'ItemNumber'},inplace=True)
-                logging.info("Column ProductNumber successfully renamed to ItemNumber")
-            if 'SupplyingWarehouse' in self.data.columns():
-                self.data.rename(columns={'SupplyingWarehouse': 'Warehouse'}, inplace=True)
-                logging.info("Column SupplyingWarehouse successfully renamed to Warehouse")
-            if 'CountryOfOrigin' in self.data.columns():
-                self.data.rename(columns={'CountryOfOrigin': 'SalesMarket'}, inplace=True)
-                logging.info("Column CountryOfOrigin successfully renamed to SalesMarket")
-        except Exception as e:
-            logging.error(
-                f"Error trying to rename columns ProductNumber, SupplyingWarehouse, \
-                CountryOfOrigin: {e}")
+    def impute_cols(self):
+        for col in self.missing_value_cols:
+            try:
+                if self.data[col].isnull().any():
+                    self.data[col].fillna('MISSING', inplace=True)
+                    logging.info(f"Missing values in {col} column filled with 'MISSING'")
+            except Exception as e:
+                logging.error(f"Error filling missing values in {col}: {e}")
     
-    def imputation_salesmarket_warehouse(self):
-        try:
-            if self.data['SalesMarket'].isnull().any():
-                self.data['SalesMarket'].fillna('MISSING', inplace=True)
-                logging.info("Missing values in SalesMarket column filled with 'MISSING'")
-            if self.data['Warehouse'].isnull().any():
-                self.data['Warehouse'].fillna('MISSING', inplace=True)
-                logging.info("Missing values in Warehouse column filled with 'MISSING'")
-        except Exception as e:
-            logging.error(f"Error filling missing values in SalesMarket, Warehouse column: {e}")
+    
