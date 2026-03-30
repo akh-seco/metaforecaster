@@ -12,6 +12,7 @@ copilot.log
 .vscode/.copilot*
 .vscode/copilot.*
 .idea/copilot*
+.vscode/settings.json
 
 # GitHub configuration for Copilot
 .github/copilot*
@@ -26,3 +27,5 @@ copilot.log
 *.userosscache
 *.sln.docstates
 
+
+.databricks
