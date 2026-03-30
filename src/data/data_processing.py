@@ -53,17 +53,6 @@ class DataProcessor:
             logging.info("Average daily total orders successfully calculated")
         except Exception as e:
             logging.error(f"Error calculating average daily total orders: {e}")
-
-    
-
-    new_name_cols = {
-        'ProductNumber': 'itemNumber',
-        'SupplyingWarehouse': 'Warehouse',
-        'CountryOfOrigin': 'SalesMarket',
-        'Quantity': 'TotalOrders'
-    }
-
-    missing_value_cols = ['Warehouse', 'SalesMarket']
         
 
     
